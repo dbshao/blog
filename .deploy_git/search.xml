@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[谷歌vps尝试]]></title>
+    <url>%2F2019%2F04%2F14%2Fgcp%2F</url>
+    <content type="text"><![CDATA[telegram关于各种校友邮箱翻车的传言不断传过来，内心还是慌张的，毕竟自己那么多资源在里面呢，最后还是买了域名上了google的官方车，我的钱包那叫一个心疼啊，不过这真金白银的下去就要好好用了。 简介google clound Platform（简称GCP）现在有个免费一年300刀的活动，可以开始薅羊毛了。你所需要的是一张visa或者MasterCard信用卡，笔者试了招商银行的visa卡，可以通过。这里面的具体步骤这里就不再赘述了。 介绍首先进入Computer Engine以后，先创建一个实例，选择合适自己的套餐。 打开HTTP流量和HTTPS流量开关。实例创建完成以后可以看到该实例的外部IP和内部IP。下面其实可以用chrome来连接服务器了，但是网页来连接会有各种操作卡顿的问题。下面需要添加公钥让本地ssh工具访问。本地生成公钥密码后，在控制台选择元数据，选择其中的ssh密钥，修改=》添加本地的公钥。 本地的ssh工具上 ssh 用户名@IP #就可以成功进入实例了，如果有问题请参照上一篇文章 sudo -i #获取root权限]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>vps</tag>
+        <tag>gcp</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[git多账号公钥添加]]></title>
+    <url>%2F2019%2F04%2F14%2Fgit%2F</url>
+    <content type="text"><![CDATA[虽说git平时不怎么常用，用的最多的也就是 git clone，但是最为大家都在夸奖的版本控制软件还是要学习一下的，你看这不最近笔者就遇到一个多账号私钥的问题，在这里把问题描述下，也很大将分享下解决办法。主要是在自己的电脑上大部分都是对github进行操作，笔者在入了gcp的坑之后也需要添加秘钥，这样两个公钥就会冲突。 事前准备无论你是windows，Linux，还是Mac，git软件自己先搞定，一些环境配置也先配置好。下面直接从钥匙的生成说起。 配置$ ssh-keygen -t rsa -C &quot;邮箱地址&quot; Generating public/private rsa key pair. Enter file in which to save the key (~/.ssh/id_rsa): 这里会提示输入rsa文件的名字和路径，加入你有很多个，建议在后面加上后缀，如id_rsa_github等，文件的路径也请自己记住（建议C:/Users/你的用户名/.ssh路径）。 Window进入C:/Users/你的用户名/.ssh文件夹，右键新建一个文本文件，改名为config即可。这里要注意，没有.ssh文件夹的要新建一个.ssh名的文件夹。 下面编写config文件，我以Github、Gitlib、OSChina，局域网为例 Host github.com HostName github.com User smallajax@foxmail.com PreferredAuthentications publickey IdentityFile /home/Workspace/ssh/id_rsa_github Host gitlib.com HostName gitlib.com User smallajax@foxmail.com PreferredAuthentications publickey IdentityFile id_rsa_gitlib Host oschina.com HostName oschina.com User smallajax@foxmail.com PreferredAuthentications publickey IdentityFile /D/Workspace/ssh/id_rsa_oschina Host 192.168.1.222 HostName 192.168.1.222 User smallajax@foxmail.com PreferredAuthentications publickey IdentityFile /D/Workspace/ssh/id_rsa_oschina 解释一下，HostName是服务器的地址，User是用户名，PreferredAuthentications照抄即可，IdentityFile是文件的绝对路径，注意盘符前面的/本地配置结束，到各自网站添加相关公钥就可以了。 关于多邮箱账户的问题有人或许会有疑问，我github，gitlab的邮箱用户名不一样怎么办，其实这个是根据项目设置的，命令行进入仓库文件夹再设置。第一种情况是先从Git上pull仓库下来，第二种情况是本地初始化Git仓库，总之进入改仓库文件夹后： git config --local user.name &quot;你的名字&quot; git config --local user.email &quot;你的邮箱&quot; 注意配置单个Git帐号时，是不进入项目文件夹就可以，不过不是使用--local，而是使用--global就可以全局配置。 配置项目用户和邮箱完成后，我们可以进入项目文件夹下的.git文件夹查看config文件内容，大概内容如下： ... [user] name = YanZhenjie email = smallajax@foxmail.com 测试配置全部结束，我们来测试一下配置是否成功： ssh -T git@github.com ssh -T git@gitlib.com ssh -T git@192.168.1.222 常见git命令学习 push代码到某个分值 git push origin 分支名字 关联本地代码到远程分支 git initgit commit -m “message”git add .git remote add origin 远程仓库地址]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>-git - 多账号</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[华硕ac86u刷梅林固件科学上网]]></title>
+    <url>%2F2019%2F04%2F08%2F%E6%A2%85%E6%9E%97%E5%9B%BA%E4%BB%B6%2F</url>
+    <content type="text"><![CDATA[虽然说winodws也好，MacBook也好翻墙也都不是很难的事情，但是家里面其他设备也需要翻墙比如nas什么的，还有windows一些客户端的问题，总是有不能翻墙的问题，这样就需要我们在路由层面翻墙了，网上比较流行的是华硕ac86u，我也在日本入手了这款路由器，真是心疼，在yodobashi买的19000多日元，虽说有point也比国内贵很多，买了后就开始着手折腾了，这里记录下。 刷机前的准备EXT格式的1G以上U盘一个，如果不知道后面有格式化教程。改版梅林安装包，下载地址为：这里，或直接到Coolshare论坛下载：这里科学上网工具离线安装包，下载地址为：这里，找到自己合适的机型。一根网线，用于连接电脑与路由器 开刷系统初始化拿到机器后，打开机器背后开关键，然后连上电源，开机。找到一根网线，一头接自己的电脑，另一头接路由器的LAN口。在浏览器地址栏中输入http://192.168.1.1进入管理后台。依次设置自己的PPPOE、无线WIFI、管理后台账号，设置完之后会进入到官方原版的后台界面。 刷改版梅林固件在后台管理界面中找到高级设置-系统管理-固件升级，选择刚才将已准备好的梅林固件（格式为.w），然后点击上传，等待两三分钟即可，当重启后重新进入后台时有一个Powered by Asuswrt-Merlin &amp; Coolshare代表成功。 双清路由器。进入高级设置-系统设置，找到Presistent JFFS2 parttition，将Format JFFS partition at next boot和Enable JFFS custom scripts and configs两项都设置为是，并点击应用本页面设置按钮，然后重启路由器即可。 安装科学上网工具由于梅林已经取消软件中心的科学上网工具在线安装，所以可采取离线安装的方式。 从这里上下载离线安装包，打开软件中心，先点击更新将软件中心升级到最新版本，然后点击离线安装，上传刚才下载的安装包，注意格式需要为.tar.gz，如果不对，手动将其补全后再上传。 等待安装成功后，再打开科学上网，再配置自己的节点即可。 挂载虚拟内存将已准备好的EXT格式U盘插入路由器背部接口（2.0或3.0都可以） 打开软件中心，将虚拟内存这个软件安装上 打开该软件，选择这个磁盘，我这里叫做sda，选择虚拟内存大小为512M或1G，然后点创建虚拟内存，等待一段时间即可。 再次打开软件中心-虚拟内存，确保状态显示为在/mnt/sda下找到swapfile，且已成功挂载！，表明已挂载成功。 U盘格式化使用ssh连接路由器 ssh admin@192.168.1.1 #用自己设置的用户名和密码 fdisk -l # 这里先输出系统分区之类的不用管，外置设备一般在最后 Disk /dev/sda: 30.7 GB, 30752000000 bytes 64 heads, 32 sectors/track, 29327 cylinders Units = cylinders of 2048 * 512 = 1048576 bytes Device Boot Start End Blocks Id System /dev/sda1 2 29327 30029824 83 Linux 删除分区，新建分区 $ fdisk /dev/sda # 这是你的设备別打成分区 Welcome to fdisk (util-linux 2.29.2). Changes will remain in memory only, until you decide to write them. Be careful before using the write command. Command (m for help): d # 输入d回车，我只有一个分区，它自动选择了，如果你有多个分区，可以多次使用d Selected partition 1 Partition 1 has been deleted. Command (m for help): n # 输入n会车，创建分区 Partition type p primary (0 primary, 0 extended, 4 free) e extended (container for logical partitions) Select (default p): p # 选择p Partition number (1-4, default 1): # 回车 First sector (2048-2065023, default 2048): #回车 Last sector, +sectors or +size{K,M,G,T,P} (2048-2065023, default 2065023): # 回车 Created a new partition 1 of type &#39;Linux&#39; and of size 1007.3 MiB. Command (m for help): w # 输入w回车，保存并退出 The partition table has been altered. Calling ioctl() to re-read partition table. Syncing disks. $ fdisk -l # 找到你的设备 可以看到ID为83就对了 Disk /dev/sda: 30.7 GB, 30752000000 bytes 64 heads, 32 sectors/track, 29327 cylinders Units = cylinders of 2048 * 512 = 1048576 bytes Device Boot Start End Blocks Id System /dev/sda1 2 29327 30029824 83 Linux 格式化分区 $ mkfs.ext4 /dev/sda1 #出错请使用ext3 # 如果你的硬盘比较大，256G以上的话，是这个命令：mkfs.ext4 -T largefile /dev/sda1 mke2fs 1.43.3 (04-Sep-2016) /dev/sda1 contains a ext4 file system labelled &#39;ONMP&#39; last mounted on Sun Nov 12 09:21:22 2017 Proceed anyway? (y,n) y # 输入y回车 $ umount /dev/sda1 # 如果出错，可能是因为已经被挂载了，先执行这个卸载]]></content>
+      <categories>
+        <category>翻墙</category>
+      </categories>
+      <tags>
+        <tag>梅林固件</tag>
+        <tag>ac86u</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[常见机场推荐]]></title>
+    <url>%2F2019%2F04%2F06%2F%E5%B8%B8%E8%A7%81%E6%9C%BA%E5%9C%BA%E6%8E%A8%E8%8D%90%2F</url>
+    <content type="text"><![CDATA[由于伟大的墙，各种各样的工具和梯子得以在这个兴旺，相信大家都可以自己买个vps搭建酸酸乳，满足自身的需要，网上一抓教程一大把，也不是很难。但自己建的机场有一个问题就是速度可能不是很理想，然后节点数目不是很多，我们有时候想要各个地区的节点可以让我们找寻最适合自己的服务器。另外还有一个就是回国的服务器价钱真是贵。这里介绍几个比较著名的机场主。 RixCloud 专业性的NO.1当然也有人叫他Richcloud，因为，贵。 528/年 每月100G 688/年 每月500G 888每月1T 不过，个人觉得值这个价，一分钱一分货 其实如果常用的，平均下来每个月也没多少。 当然，贵也有贵的道理，全部节点BGP中继阿里云机房（500M/300M/200M） 虽然看起来延迟比直连要高一些，但是实际起速要比直连还快很多，而且稳定。另一个推荐原因就是稳定了，备用机比较多，用着比较踏实，尤其是路由器用户。。。几乎多数节点支持NEtflix 部分节点支持美区Hulu PS:支持surge托管兼容模式 支持普通端口+单端口 推荐普通端口 单端口是80+443端口。https://home.rixcloud.me 魅影极速 稳定度五星推荐服务器非常不错，全部服务器都是深港等IPLC中继，国内阿里云200M/500M，很低调的站，TG群内都很少发网址链接，站长人在新加坡。推荐 深圳香港CN2（俗称深港），深圳新加坡CN2，杭港上港京港CN2等，深圳日本bbtec，上海硅谷等线路，香港LW/HKBN/HGC也很香为了抬高门槛，取消了月付，只有季付和年付 VIP3季付120.年付400 节点40+ VIP4-5半年付360 年付600 包括深港集群 节点100+ 套餐直接给的是总流量，VIP3每月400G流量，年套餐就是直接给4.7T左右流量 VIP 4-5是每月800G，一年9.4T左右 一分钱一分货，物超所值。限制4个连接数 。 总体来说很满意 起速够快，秒上200M 可惜不支持surge 也比较适合长宽移动等QOS用户https://www.myjs.tw/ DlerCloud（墙洞） 机场中的“技术流”（最近在重写后端）估计很多人对墙洞并不陌生，甚至说很熟悉，墙洞大佬lhie1的规则估计多数人都用过，不过机场很多人并不清楚，其实规模并不小。也是一家挺强的机场，速度相当不错，最满意的是维护节点的速度吧，多数情况下，多数节点都可以跑很不错的速度。包括部分中继节点，港台日等地区节点也挺多，包括一些游戏节点。 近期更新了网站模板，域名等等，提升了部分线路带宽，为回国用户增加了“回国模式”，已经上线一批不限速的深港等专线 最近线路越来越多了，越来越稳定，尤其是新上的很多条Azure，表现真的很好。。。 因为lhie1大佬的原因吧，这也是一家“爱折腾”的站，专属客户端，JSBox插件，规则，等等，比较喜欢折腾技术和新东西吧，挺不错的。 因为成本上浮，价钱也有所调整Bronze 套餐 (年付)：228 （3个IP同时在线）Silver 套餐 (月付)： 32（5个IP）Silver 套餐 (年付)：328（5个IP）Gold 套餐 (年付)：448（6个IP） 等。gold或以上套餐，部分服务器不同。流量不同 支持Surge托管 支持surge的公共端口（单） 支持普通端口+152端口 新增 SS 订阅 支持Clash订阅 最近一直在单独拉线官网 https://dlercloud.net Nexitally （全中转佛系机场）又是一家全线中转阿里云线路的高端机场，成立大概一年半了，机场主也比较佛系，机场是他们公司副业。稳定性和速度都不错，年前那时候试用过，他家有自己的傻瓜客户端，各个平台，可以登陆后一键连接，不限流量。另外支持一些VPN协议，不过还是推荐使用SSR或自家客户端。价钱其实也不算太亲民，但是对于稳定追求性的用户也还好，9.99美元/每月，77.4美元/年（人民币五百多），用自家客户端是不限流量，其他客户端订阅连接SSR是每月400G。基础套餐自家客户端限制2个设备，SSR连接订阅无限制IP或设备。不支持surge托管 网站： https://nexitally.com telegram群 https://t.me/nexitallyusers 喵帕斯 机场届老牌 性价比很高我一直比较推崇喵帕斯，对喵的观感也很好，本身也是老机场了，极限速度最快，稳定性不错，香港机子很多，一排排的HKT很震人，我这里测的跑的最快的一次下载速度就是用喵的HKT跑出来的，下载80M+/S，其他服务器速度也是很快，以前最爱跑测速的时候就是最爱喵帕斯，因为极限速度最高，下载列表一片红，很好看。。。说起来早期喵站有时候有点像我的半个启蒙，知道了什么服务器是好是坏。。。 HKT自从19后换了SSR一直有断流毛病，不过最近喵酱涅酱等人好像修复的差不多了，比以前好用了很多。。而且说实话，价钱也确实挺便宜，物超所值， 20/月一级无限流量；30/月二级用户，1T流量，线路多些 一级IP总时长每天48小时，二级60小时 支持443+543+80端口 PS：最近在测试SS吧 最近一些用户反映现在不太稳定，1级用的人太多。。 推荐直接上2级，新上了一批10G带宽的HKT 官网 https://www.xn--i2ru8q2qg.com BoomCloud 老司机带你飞也是一家不错的机场，稳定性还不错，速度也可以，跟rix网站一个模板，服务器排序也差不多，主打香港日本，部分线路中继国内阿里云，站长人在香港，是个老司机，比较低调的一个机场，用户相对比较少，价位套餐有高有低，低的158半年每月60G，高的68/月无限流量。 应该跟之前的abc（BosLife）一个档次，ABC之前传的比较厉害，大概跟rix齐名，个人觉得不太能赶上rix。ABC的我个人没买，不过有朋友买了给过我一些节点让我测速，但是跑起来并不太理想，也可能是时段不对等等吧。 很多线路支持Netflix. 总体来说还算很不错的一家。 支持普通端口+单端口 推荐单端口 PS: boom支持surge托管兼容协议 +10元添加支持 官网： https://www.boomss.co Boslife(原abclite) 贵这家名气比较大，不过我没有买过，还是朋友提供的，我来测下，特点大概就是贵然而稳定吧，不过节点比较少。 659元/年的D套餐每月500G流量，36个服务器节点。16个节点是中转线路，其他直连。 D套餐最近加了一些服务器，速度也比之前快不少。229元/年/月20G流量 299元/年/50G每月 829元/年/1000G每月 支持surge托管。具体还有什么其他特点也不太清楚了。应该是比较适合喜欢稳定的土豪了。他家的香港确实起速很快 增加微信、支付宝支付渠道 支持单端口 负载应该比较低，所以表现一直还不错 最近测速中转部分都差强人意 网站： https://www.boslife.co/ 东方网络 （高性价比） 之前一直比较低调的一家站，人数适中，服务器不少，速度也都不错，个人还比较喜欢。 10元/20元 每月流量200G，100元-200元/年，流量比较少，不过像HKT/HKBN/深港/深坡/沪美也是0.1倍率 可以买流量包，实际可以使用2000G 很多服务器速度不错。有一些BGP线路，每月20的包含一些游戏线路。 稳定性待观察中，不限制IP，当然肯定也不能无限，给一两个个朋友用一般没问题。 PS：俩月没看，发现1级增加了很多线路，包括几条专线，还不错。速度很不错，表现很好 普通端口+单端口 据一个大佬跟我说，他家成本不低，一直在加新机器 网址 https://touhou.cloud ssrcloud （原Googlessr谷歌减速器）这家开了有段时间了，也是合租香港家宽慢慢起步的，测了测速度相当不错，最近加了太多服务器，都有点眼花缭乱了，性价比很好，质量不错。 支持普通端口+单端口 支持surge托管（需用群里工具） 价钱很实惠 套餐5元每月 15元/季起 100元/年或其他大流量套餐 流量套餐不限制设备数 几月过去了，半夜测了下，速度依然很快，性价比也很好。 180+节点 新增多条BGP线路 PS: 网站域名更换比较频繁，这个感觉比较麻烦，所以能进群就进群吧。。另外部分用户反映有些节点指向同一个服务器 不过还好，总量还是比较多的。 网站 https://chinaunicomglobal.ga/ Mengdi-SS（高性价比）前身是聚贤阁，人气比较旺，改成收费机场有段时间了，一直在加服务器。另外，站长是个很开朗大气的妹子~~群管理也很多妹子。。。 套餐很简洁，没那么复杂，不会很乱，这点我比较喜欢，就是13元/月300G流量 和 130元/年流量6000G 以及1元试用 服务器比较全面，速度也不错，限制设备4个 性价比很不错 新增BGP高级套餐，20元/每月，350G 包含高级国内中继+v2ray订阅 支持surge托管（正在调试） 支持普通端口+单端口 支持V2 官网 https://mdss.cloud/ MoCloudPlus（苟里斯站长暂时关站到4月）开站也有些时日了，这是Mocloud第二家站，性价比都不错，相对比较低调，今天测了下速度也挺快的，除了那些被QOS的AWS。。。 套餐的话是根据等级 7元/月 15元/月起步，然后70每年 150每年这样子 流量给的很足。 第一家站的话服务器少点，价钱更低一些。。 支持单端口 8折优惠码 有效期30天，可使用20次 YddW0bZe 机场主比较低调，不想公开网址。。 NSL NetworkNSL家也有段时间了，最早那时候服务器不算多，当时也没在意，后来买了试了试，然后发现欧洲等服务器速度很不错，就放上来了。中途有一段时间网站维护又撤掉，今天重新来测测看，速度还不错，比较稳定，性价比可以的。 5元每月起步，40G流量，不限制IP数； 10元/100G，不限制IP； 20元/月和30元/月的不限流量 限制3-4个IP数 PS: 这两天测了几家的速度，有几家最近表现不太好，这家测了下比较稳，速度依旧不错 现已支持surge托管 支持普通端口+80+443+989+8080端口 网站 https://www.nsl-net.com YoYu（适合高质量轻度用户）也是一家新站了，服务器质量不错，速度也很好，有部分专线和20跟香港Azure，以及其他地区的，全部独享线路，大概在80条+ 20元/月 50G流量， 40元/月 100G流量，80元/每月200G流量，流量其实不算多，所以我说适合重质量的轻度用户，不过部分线路是0.2/0.5倍率的，所以偏中度用户也可以。 支持普通端口+518单端口 支持Surge Clash 官网 https://www.yoyutrans.comTelegram https://t.me/yoyutrans MunCloud （91Cloud）近期新入的一家，跑起来速度相当不错，主要是几乎每条速度跑起来都比较快，强迫症的我比较喜欢这个测试数据图，近期还在继续增加线路，听说会再加一些日本线路，有几条国内中继线路。 价钱也不贵，19.9元/每月 300G流量；27.9元/500G，还有800G，1T的套餐。总体来说还算不错的一家。 增加surge托管。 支持普通端口 支持clash 网站 https://www.muncloud.com 9折优惠码 W57RFWY3QV]]></content>
+      <categories>
+        <category>翻墙</category>
+      </categories>
+      <tags>
+        <tag>ss</tag>
+        <tag>酸酸乳</tag>
+        <tag>机场</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[clash]]></title>
+    <url>%2F2019%2F04%2F06%2Fclash%2F</url>
+    <content type="text"><![CDATA[用了五年的MacBook Pro 有点感觉不够用了，去年三月份买了xps 15。刚开始的时候真有好多不习惯的地方，不过后面慢慢也就还OK，除了界面，字体无法忍受之外其他还是可以的（哭）。其中有一点无法忍受的是windows没有伟大的surge帮我管理整个网络，虽说看了这么多翻墙的的服务软件，加上小飞机的流行，就个人来说比起surge都有着不小的差距]]></content>
+      <categories>
+        <category>windows</category>
+      </categories>
+      <tags>
+        <tag>winodws软件</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[一键安装桌面环境和RDP远程桌面连接]]></title>
+    <url>%2F2019%2F03%2F31%2F%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85Linux%E5%9B%BE%E5%BD%A2%E7%95%8C%E9%9D%A2%E5%92%8C%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5%2F</url>
+    <content type="text"><![CDATA[这段时间可算是是折腾的够呛，为了把群晖nas的东西移动到google driver可谓是想了好多办法，虽然群晖nas自带备份到云盘服务，但是我们伟大的墙，让这个不能用，本来直接路由器翻墙就能解决的问题，可是人在国外实在是无奈，网上也有介绍用dock安装小飞机的方法，这边试了下，也没有搞定，网上有大神试过的给点意见，也许是我的shadowsocks服务不好。也在网上试过通过nfs服务挂载到linux的方法，可是我的服务器连不上我的群辉nas真的是没办法。只能想个本办法，把群晖的东西分享出来在下载了，所以这篇文章就有了 功能介绍1，一键安装，你需要全新的Linux系统，最低硬件要求是：CPU核心≥1，内存≥1GB，磁盘空间≥15GB2，创建3GB内存交换3，安装了中文环境支持4，默认安装chrome，firefox5，安装远程桌面客户端 #下载脚本 wget --no-check-certificate -qO ~/Linux-Remote-Desktop-Environment.sh &#39;https://tech.cxthhhhh.com/tech-tools/Linux-Remote-Desktop-Environment/Linux-Remote-Desktop-Environment.sh&#39; &amp;&amp; chmod a+x ~/Linux-Remote-Desktop-Environment.sh #CentOS 7+安装 bash ~/Linux-Remote-Desktop-Environment.sh -CentOS #Debian 9+安装 bash ~/Linux-Remote-Desktop-Environment.sh -Debian #Ubuntu 18.04+安装 bash ~/Linux-Remote-Desktop-Environment.sh -Ubuntu 网上的大佬还对这个脚本遇到的一些问题做了归纳大致如下 1、完成后。你就可以连接IP:3389（通过远程桌面连接）。RDP登陆账号密码就是您的系统账户和密码。(root用户和RdpUser用户均可登陆，root密码是您自己设置的密码，RdpUser密码为默认密码)2、创建新用户时，请授权新用户RDP远程连接。 你需要这样做。（我将演示创建新用户CXT） #输入useradd -m CXT创建用户或者在[控制中心]-[用户和组群]创建新用户CXT。(为CXT设置密码passwd CXT) #使用root用户切换进入到CXT的目录。 cd /home/CXT #输入下面的命令(你需要注意，下面命令中引号是”英文状态单引号”。) touch ./.Xclients echo &#39;mate-session&#39; &gt; ./.Xclients chmod a+x ./.Xclients #(可选)如果您是Debian/Ubuntu用户，新建用户后需要运行Windows程序，出现中文乱码请参照第9条的方案处理。(CentOS/Redhat无此问题) 3、Chrome浏览器不能通过root用户运行。如果您需要运行，请新建账户。(或者附加运行命令 –no-sandbox)4、一些Windows应用程序不工作，也许需要您关闭SELinux。（不推荐，一般情况下不需要）5、一些Windows软件看起来模糊，你需要调整软件后面的背景颜色为暗色调。（例如更换壁纸为深色壁纸）6、现在，你已经有了浏览器，我相信你可以完成很多的事情了。7、如果你是Debian/Ubuntu用户，你需要修改部分一键脚本进行手动安装。8、当前的默认系统语言是中文。如果您是英语用户，请执行’ sudo localectl set-locale LANG = en_US.UTF-8 ‘ 9、Debian/Ubuntu系统下，由您新建的用户，运行Wine可能会出现中文乱码，需要您执行以下命令(以新建CXT用户为例)。 #运行命令 su - CXT -c &#39;mkdir -p /home/CXT/.wine/drive_c/windows/Fonts/&#39; cp -rf ~/.wine/drive_c/windows/Fonts/* /home/CXT/.wine/drive_c/windows/Fonts/ chown -R CXT:CXT /home/CXT/.wine/drive_c/windows/Fonts/* 10、一般情况下不建议使用OVZ服务器运行本程序。当然如果您想使用OVZ虚拟化的服务器，请注意： #Swap Memory不会生效，因此你的内存必须≥2GB+。 #你需要等待Swap Memory创建完成后，立即开启新SSH窗口，删除Swap挂载。 #挂载的设置文件在这里(/etc/fstab)，删掉(/var/swapd swap swap default 0 0)。 #删除文件(/var/swapd)。 文章来源：https://tech.cxthhhhh.com/linux/2018/08/08/original-one-click-installation-of-desktop-environment-rdp-windows-support-for-linux-cn.html]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>桌面环境</tag>
+        <tag>RDP</tag>
+        <tag>远程桌面</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[安装aria2和图形界面的配置]]></title>
+    <url>%2F2019%2F03%2F31%2Fcaddy-aria2%2F</url>
+    <content type="text"><![CDATA[前面已经有教程，可以一键安装Aria2+Caddy+Rclone+GDlist+Aria2Ng+Google Drive到服务器的一个工具，但很多网友可能会觉得晕晕乎乎的，然后又写服务也不是必须的，现在就把aria2和他的图形界面单独拿拉出来说说 安装aria2虽然aria2现在已经支持install安装了，这里还是给出逗比大佬的安装脚本，本人觉得特别好用。 wget -N --no-check-certificate https://raw.githubusercontent.com/ToyoDAdoubiBackup/doubi/master/aria2.sh &amp;&amp; chmod +x aria2.sh &amp;&amp; bash aria2.sh #备用地址 wget -N --no-check-certificate https://www.moerats.com/usr/shell/Aria2/aria2.sh &amp;&amp; chmod +x aria2.sh &amp;&amp; bash aria2.sh aria2常见命令启动：service aria2 start 停止：service aria2 stop 重启：service aria2 restart 查看状态：service aria2 status 配置文件：/root/.aria2/aria2.conf（配置文件包含中文注释，但是一些系统可能不支持显示中文） 下载目录：/usr/local/caddy/www/aria2/Download（该目录为Github下载安装的，而备用地址下载的默认为/usr/local/caddy/www/file） 安装 caddywget https://git.io/vra5C -O - -o /dev/null|bash caddy install 会要求你输入域名和邮箱，自动帮你签发ssl。然后使用caddy start命令运行caddy。 常用命令caddy start #开启Caddy Web Server caddy stop #停止Caddy Web Server caddy reload #重载Caddy Web Server caddy restart #重启Caddy Web Server caddy status #查看Caddy Web Server状态 caddy install #安装Caddy Web Server caddy edit #编辑配置文件Caddyfile caddy service #使Caddy Web Server成为一项服务(upstart/systemd) caddy update #升级Caddy Web Server caddy delete #卸载Caddy and data caddy about #关于Caddy Web Server caddy version #检测脚本/Caddy/PHP5-fpm版本信息 安装AriaNgAriaNg下载地址：https://github.com/mayswind/AriaNg/releases yum install unzip #CentOS系统 apt-get install unzip #Debian和Ubuntu系统 cd /var/caddywww &amp;&amp; rm -rf index.html wget https://github.com/mayswind/AriaNg/releases/download/0.3.0/aria-ng-0.3.0.zip unzip aria-ng-0.3.0.zip 安装webui-aria2webui-aria2下载地址：https://github.com/ziahamza/webui-aria2 yum install git #CentOS系统 apt-get install git #Debian和Ubuntu系统 cd /var/caddywww &amp;&amp; rm -rf index.html git clone https://github.com/ziahamza/webui-aria2.git mv webui-aria2/* /var/caddywww]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+        <tag>aria2</tag>
+        <tag>caddy</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[google prettify code的使用]]></title>
+    <url>%2F2019%2F03%2F28%2Fgoogle-prettify%2F</url>
+    <content type="text"><![CDATA[相信大家很多时候都会觉得，哎呀这个代码的样式真是丑，这个地方怎么可以这个颜色，我要的高亮和字体哪里去了，这里怎么会变得这么丑，我的神呀，我是处女座的小乖乖，我受不了呀。当然我们伟大的nexT自带了四个主题，可是四个主题哪里够我们玩耍，我们的征途可是星辰大海。 介绍下 google pretty code代码在这里，有兴趣的观摩下。https://github.com/google/code-prettify 支持语言code-prettify的GitHub页面中列出了支持的语言：C and friends, Java, Python, Bash, SQL, HTML, XML, CSS, JavaScript, Makefile, and Rust.以及Ruby, PHP, VB, and Awk and a decent subset of Perl and Ruby其他语言解析不在prettify.js中，需要手动加载额外的js文件，可在prettify-4-Mar-2013.tar.bz2压缩包的src文件夹内找到这些语言的解析js 除此之外还有丰富的皮肤可供选择，地址在这里。效果图如下：这里面效果图有深色皮肤和浅色皮肤，网友可以根据自己的喜好选择。 下面说说安装方法。下载google code prettify，解压后把代码放到hexo/source/plugins/prettify目录下下载地址将下载的目录解压到下面的文件夹~\themes\next\source\lib\prettify将从上面下载的皮肤css文件下载到~\themes\next\source\lib\prettify\skins 禁用hexo本身的代码高亮设置设置google-prettify修改主题配置文件 # highlight: # enable: true # line_number: true # auto_detect: true # tab_replace: highlight: enable: false line_number: false auto_detect: false tab_replace: #自定义高亮代码（google prettify code） #这里面填写你想要的皮肤 custom_highlight_theme: atelier-dune-light 添加prettify在~\themes\next\layout_third-party中新建prettify.swig文件，并在里面填写下面内容 &lt;link rel=&quot;stylesheet&quot; href=&quot;/lib/prettify/skins/{{ theme.custom_highlight_theme }}.css&quot; type=&quot;text/css&quot;&gt; &lt;script src=&quot;/lib/prettify/prettify.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt; &lt;script type=&quot;text/javascript&quot;&gt; $(document).ready(function() { $(&#39;pre&#39;).addClass(&#39;prettyprint linenums&#39;).attr(&#39;style&#39;, &#39;overflow:auto;&#39;); prettyPrint(); }); &lt;/script&gt; #注意上面的文件夹位置要与你安装的位置名字一致 在~/themes/next/layout/_layout.swig中添加下列引用 #添加google prettify 代码样式# {% include '_third-party/prettify.swig' %} 这样重新部署以后就可以看到效果了]]></content>
+      <categories>
+        <category>工具</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>google</tag>
+        <tag>prettify代码样式</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Aria2+Caddy+Rclone+GDlist+Aria2Ng+Google Drive一键安装脚本]]></title>
+    <url>%2F2019%2F03%2F26%2Faria2%2F</url>
+    <content type="text"><![CDATA[前面已经搞定了百度盘还有googledrive，基本上所有的功能都能实现了，但是由于大百度对某些资源的和谐不是很好，所以还是要研究一下怎么把资源下载到服务器上的办法，好在我们有神器aria2，本章主要研究怎么在linux上安装，至于windows和mac的话，请自行研究。 感谢各位大神在github上造的各种轮子，让我们这些小白也能享受生活,话不多说走起！这里采用的是一件安装工具，支持的系统有Debian 8 +、Ubuntu 16+前提是需要域名解析。 wget https://www.moerats.com/usr/shell/Aria2_gdlist.sh &amp;&amp; bash Aria2_gdlist.sh #输入GDlist域名 请输入你的GDlist域名信息: #设置Aria2密钥 请输入你的Aria2密钥: #配置Rclone，大致如下 n) New remote s) Set configuration password q) Quit config n/s/q&gt; n name&gt; aaa #随便填，后面要用到 Type of storage to configure. Choose a number from below, or type in your own value 1 / Alias for a existing remote \ &quot;alias&quot; 2 / Amazon Drive \ &quot;amazon cloud drive&quot; 3 / Amazon S3 (also Dreamhost, Ceph, Minio, IBM COS) \ &quot;s3&quot; 4 / Backblaze B2 \ &quot;b2&quot; 5 / Box \ &quot;box&quot; 6 / Cache a remote \ &quot;cache&quot; 7 / Dropbox \ &quot;dropbox&quot; 8 / Encrypt/Decrypt a remote \ &quot;crypt&quot; 9 / FTP Connection \ &quot;ftp&quot; 10 / Google Cloud Storage (this is not Google Drive) \ &quot;google cloud storage&quot; 11 / Google Drive \ &quot;drive&quot; 12 / Hubic \ &quot;hubic&quot; 13 / Local Disk \ &quot;local&quot; 14 / Microsoft Azure Blob Storage \ &quot;azureblob&quot; 15 / Microsoft OneDrive \ &quot;onedrive&quot; 16 / Openstack Swift (Rackspace Cloud Files, Memset Memstore, OVH) \ &quot;swift&quot; 17 / Pcloud \ &quot;pcloud&quot; 18 / QingCloud Object Storage \ &quot;qingstor&quot; 19 / SSH/SFTP Connection \ &quot;sftp&quot; 20 / Webdav \ &quot;webdav&quot; 21 / Yandex Disk \ &quot;yandex&quot; 22 / http Connection \ &quot;http&quot; Storage&gt; 11 #选择11，Google Drive Google Application Client Id - leave blank normally. client_id&gt; #留空 Google Application Client Secret - leave blank normally. client_secret&gt; #留空 Scope that rclone should use when requesting access from drive. Choose a number from below, or type in your own value 1 / Full access all files, excluding Application Data Folder. \ &quot;drive&quot; 2 / Read-only access to file metadata and file contents. \ &quot;drive.readonly&quot; / Access to files created by rclone only. 3 | These are visible in the drive website. | File authorization is revoked when the user deauthorizes the app. \ &quot;drive.file&quot; / Allows read and write access to the Application Data folder. 4 | This is not visible in the drive website. \ &quot;drive.appfolder&quot; / Allows read-only access to file metadata but 5 | does not allow any access to read or download file content. \ &quot;drive.metadata.readonly&quot; scope&gt; 1 #设置权限，选择1 ID of the root folder - leave blank normally. Fill in to access &quot;Computers&quot; folders. (see docs). root_folder_id&gt; #留空 Service Account Credentials JSON file path - leave blank normally. Needed only if you want use SA instead of interactive login. service_account_file&gt; #留空 Remote config Use auto config? * Say Y if not sure * Say N if you are working on a remote or headless machine or Y didn&#39;t work y) Yes n) No y/n&gt; n #选择n If your browser doesn&#39;t open automatically go to the following link: https://xx #复制到浏览器获取验证码 Log in and authorize rclone for access Enter verification code&gt; #填入上面获取到的验证码 Configure this as a team drive? y) Yes n) No y/n&gt; y #选择y Fetching team drive list... No team drives found in your account-------------------- [rats] type = drive client_id = client_secret = scope = drive.readonly root_folder_id = service_account_file = token = {&quot;access_token&quot;:&quot;&quot;} team_drive = -------------------- y) Yes this is OK e) Edit this remote d) Delete this remote y/e/d&gt; y #选择y Current remotes: Name Type ==== ==== Rats drive e) Edit existing remote n) New remote d) Delete remote r) Rename remote c) Copy remote s) Set configuration password q) Quit config e/n/d/r/c/s/q&gt; q #选择q退出 #最后输入Name和需要挂载的文件夹 请输入你刚刚输入的Name: 请输入你云盘中需要挂载的文件夹: GDlist的说明不是本文的重点，这里不去介绍，想知道用法的请自行google。最后Aria2ng的访问地址为ip:8000，然后填上密匙即可下载文件。 界面如下，在秘钥那设置自己设置的秘钥即可使用。 这里稍微说下这个工具的一些优缺点，就我使用的情况来看种子和磁性链接支持较好。对于FTP会存在下载错误的情况，而且不支持电驴连接，笔者的建议是结合百度网盘linux界面版一起使用，这样很多资源会很快秒下。然后被和谐的资源可以用这个下载，这样就能达到最佳效果。下载完毕后再把资源mv到google网盘简直完美！这里需要提醒下的是如果下载目录直接写google的挂在目录会偶尔导致错误，我的建议是先下载到本地再mv到google网盘。]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>离线下载</tag>
+        <tag>百度离线</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[hexo的nexT主题优化设置]]></title>
+    <url>%2F2019%2F03%2F25%2F%E5%8D%9A%E5%AE%A2%E7%9A%84%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98%2F</url>
+    <content type="text"><![CDATA[为了将百度网盘的东西全部转到googledrive，才有了这个博客的诞生。作为非处女座的我可也是一顿折腾。想要博客完美，真是走过无数的坑，也写下来希望对有建站愿望的网友有所帮助吧 安装博客，配置主题真没什么好说的，网上资源很多，略过吧。hexo主题很多，不过最火的是nexT。下面的折腾都是在nexT基础上进行设置的，其他主题的话网友还参考配置。其实参考下官方文档基本上所有的都可以解决http://theme-next.iissnan.com/getting-started.html 在主页添加最近添加访客添加评论添加访问统计自定义样式添加文章版权SEQ设置自定义格式虽然现有的主题已经让我们的markdown很好了，但是免不了有一些想要自主定义的，给一些特定文字增加背景呀，让我们的博客更加炫酷。这里分享下我的一些设置，当然也是copy网上大佬的一些设置 更改自带的行内code样式code { display:inline; padding:.2em .6em .3em; font-size:80%; font-weight:bold; line-height:1; color:#fff; text-align:center; white-space:nowrap; vertical-align:baseline; border-radius:0; background-color: #2780e3; } 这里是code行内样式 颜色块黄span#inline-yellow { display:inline; padding:.2em .6em .3em; font-size:80%; font-weight:bold; line-height:1; color:#fff; text-align:center; white-space:nowrap; vertical-align:baseline; border-radius:0; background-color: #f0ad4e; } } 这里是颜色块黄 颜色块绿span#inline-green { display:inline; padding:.2em .6em .3em; font-size:80%; font-weight:bold; line-height:1; color:#fff; text-align:center; white-space:nowrap; vertical-align:baseline; border-radius:0; background-color: #5cb85c; } 这里是颜色快绿 颜色块蓝span#inline-blue { display:inline; padding:.2em .6em .3em; font-size:80%; font-weight:bold; line-height:1; color:#fff; text-align:center; white-space:nowrap; vertical-align:baseline; border-radius:0; background-color: #2780e3; } 这里是颜色块蓝 颜色快紫span#inline-purple { display:inline; padding:.2em .6em .3em; font-size:80%; font-weight:bold; line-height:1; color:#fff; text-align:center; white-space:nowrap; vertical-align:baseline; border-radius:0; background-color: #9954bb; } 这里是颜色快紫 左侧边框红色块级p#div-border-left-red { display: block; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-left-width: 5px; border-radius: 3px; border-left-color: #df3e3e; } 这里是左侧边框红色块级 左侧边框黄色块级p#div-border-left-yellow { display: block; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-left-width: 5px; border-radius: 3px; border-left-color: #f0ad4e; } 这里是左侧边框黄色块级 左侧边框绿色级块p#div-border-left-green { display: block; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-left-width: 5px; border-radius: 3px; border-left-color: #5cb85c; } 左侧边框绿色级块 左侧边框蓝色级块p#div-border-left-blue { display: block; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-left-width: 5px; border-radius: 3px; border-left-color: #2780e3; } 这里是左侧边框蓝色级块这里是左侧边框紫色级块这里是右侧边框红色级块这里是右侧边框蓝色级块这里是右侧边框黄色级块这里是右侧边框绿色级块这里是上侧边框绿色级块这里是上侧边框红色级块]]></content>
+      <categories>
+        <category>blog</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>nexT</tag>
+        <tag>自定义样式</tag>
+        <tag>添加评论</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[百度网盘挂载到服务器]]></title>
+    <url>%2F2019%2F03%2F24%2F%E7%99%BE%E5%BA%A6%E7%BD%91%E7%9B%98%E6%8C%82%E8%BD%BD%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%2F</url>
+    <content type="text"><![CDATA[上面已经成功把google网盘挂载到服务器上了，接下来如果吧百度云也挂上去的话，岂不是只要cp -p 就能解决所有问题了，现实并没有那么理想，目前并没有找到将百度网盘挂载到系统上的方法，不过有下面两个方法可以解决。 BaiduPCS-GoGithub地址https://github.com/iikira/BaiduPCS-Go 下载点击查看，找到适合自己服务器的版本，这里以vps64为例子。 #下载并解压程序，然后删除压缩文件 wget https://github.com/iikira/BaiduPCS-Go/releases/download/v3.5.6/BaiduPCS-Go-v3.5.6-linux-amd64.zip unzip BaiduPCS-Go-v3.5.6-linux-amd64.zip &amp;&amp; rm -rf BaiduPCS-Go-v3.5.6-linux-amd64.zip 配置#设置下载文件的储存目录，默认存在/root/Downloads ./BaiduPCS-Go config set -savedir /home #设置下载最大并发量为200，建议值50~500，数值越大速度越高，但太高可能会出问题 ./BaiduPCS-Go config set -max_parallel 200 命令介绍 #进入到之前解压的文件里运行相关命令 cd BaiduPCS-Go-v3.5.6-linux-amd64 #登录百度云盘 ./BaiduPCS-Go login #要求用户名 密码 图形验证码 短信验证等 #列出已登录百度帐号列表 ./BaiduPCS-Go loglist #获取当前百度帐号 ./BaiduPCS-Go who #切换当前的百度帐号，&lt;uid&gt;请在列表里查看 ./BaiduPCS-Go su &lt;uid&gt; #退出当前登录的百度账号 ./BaiduPCS-Go logout #查看网盘总空间和已使用的 ./BaiduPCS-Go quota 错误处理如果下载的时候遇到下面的错误获取路径信息错误, 获取文件/目录的元信息: 网络错误, Post http://pcs.baidu.com/rest/2.0/pcs/file?app_id=266719&amp;method=meta:net/http: request canceled while waiting for connection (Client.Timeout exceeded while awaiting headers) 请做如下处理新规如下shell，命名为appid.sh并执行即可 item=266718 function check(){ ./BaiduPCS-Go config set -appid=$item &amp;&gt; /dev/null ./BaiduPCS-Go ls | grep -q 遇到错误 if [ $? != 0 ];then echo &quot;当前可用appid：$item ，已设置成功，BaiduPCS-Go 现可用正常使用了！&quot; else let item+=1 check fi } check bash appid.sh 下载文件./BaiduPCS-Go d &lt;网盘文件或目录的路径1&gt; &lt;文件或目录2&gt; &lt;文件或目录3&gt; ... #命令示范 #下载根目录rats.xx文件 ./BaiduPCS-Go d rats.xx #下载moe目录rats.xx文件 ./BaiduPCS-Go d /moe/rats.xx #下载根目录moe文件夹所有文件 ./BaiduPCS-Go d /moe #下载根目录moe文件夹的子文件夹rats所有文件 ./BaiduPCS-Go d /moe/rats 上传文件#将服务器上的/root/rats.xx文件上传到网盘根目录moe文件夹，如果是根目录则用/ ./BaiduPCS-Go u /root/rats.xx /moe #将服务器上的/root/rats文件夹及里面的文件上传到网盘根目录moe文件夹，如果是根目录则用/ ./BaiduPCS-Go u /root/rats /moe 这个工具命令实在太多，具体参照大佬的github。 稍微总结下这个软件的优点。支持Windows、macOS、linux、移动设备等。百度帐号多用户支持。下载网盘内文件，支持多个文件或目录下载，支持断点续传和单文件并行下载。上传本地文件，支持上传大文件(&gt;2GB)，支持多个文件或目录上传。离线下载，支持http/https/ftp/电驴/磁力链协议。 当然也有缺点那就是命令实在是太多不太方便操作 BaiduPCS-Web 为了解决上面的命令繁琐的问题，有大神在上面的基础上做出了web版地址在这里程序的话，作者已经打包好了直接下载就好了，下载地址 界面大概这个样子 windows的版本直接点开就可以了 下面介绍Linux wget http://qiniu.zoranjojo.top/BaiduPCS-Go-3.6.5-linux-amd64.zip #解压文件 unzip BaiduPCS-Go-3.5.8-linux-amd64.zip #进入文件夹 cd BaiduPCS-Go-3.5.8-linux-amd64 #授权文件 chmod a+x BaiduPCS-Go #运行 ./BaiduPCS-Go &amp; #有可能防火墙需要设置下 #CentOS 6 iptables -I INPUT -p tcp --dport 5299 -j ACCEPT service iptables save service iptables restart #CentOS 7 firewall-cmd --zone=public --add-port=5299/tcp --permanent firewall-cmd --reload 然后使用浏览器访问http://ip:5299即可 总结一下，该版本继承了上面软件的优点，并且有界面便于操作。缺点也有，就是在下载大量文件会造成服务器卡顿，不如第一个稳定，不知道是不是我服务器太差的原因。 有了上面两个大杀器就可以很简单的把我们的百度云盘的内容转到我们的无限gdrive啦笔者经过三天的时间大概转了1.7T，速度还是很可以的。用的就是上面的BaiduPCS-Go+rclone，希望可以给撸谷歌无限盘的玩家一些前车之鉴吧。]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>百度网盘</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[将Google网盘挂载到Linux服务器上]]></title>
+    <url>%2F2019%2F03%2F24%2F%E5%B0%86Google%E7%BD%91%E7%9B%98%E6%8C%82%E8%BD%BD%E5%88%B0Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%2F</url>
+    <content type="text"><![CDATA[有了无限容量的gdriver应该怎么办，当然是挂载服务器上啦。下面介绍gdriver挂载在服务器上的三种方法 准备工作无论采用什么方法都需要google账号开通api权限，取得认证。 在google api中取得凭据 客户端ID和客户端秘钥 Rclone（推荐）yum -y install wget unzip screen fuse fuse-devel wget https://downloads.rclone.org/v1.39/rclone-v1.39-linux-amd64.zip unzip rclone-v1.39-linux-amd64.zip cd rclone-v1.39-linux-amd64 ./rclone config 执行完上述命令后进入选择阶段新的一个远程桌面，并给他去一个名字然后选择需要挂载的网盘 google drive是 10接着client_id、client_secret、service_account_file都留空直接回车，Use auto config这里我们选择n，如下图：rclone会在终端内给我们回显一个GoogleDrive的授权登录地址，我们将登陆地址输入到浏览器中，然后把取得的认证码输入到ssh框中就好。然后进行确认操作，是否设置为团队盘，对这个远程盘进行操作，以及退出，分别选择n,y,q 执行加载命令并查看效果 mkdir -p /lala/gdrive ./rclone mount lala: /lala/gdrive --allow-other --allow-non-empty --vfs-cache-mode writes&amp; #后台运行 df -h #不出意外的话应该成功了 root@ubuntu-itachi:~# df -h Filesystem Size Used Avail Use% Mounted on udev 985M 0 985M 0% /dev tmpfs 200M 884K 199M 1% /run /dev/vda1 49G 13G 36G 27% / tmpfs 997M 0 997M 0% /dev/shm tmpfs 5.0M 0 5.0M 0% /run/lock tmpfs 997M 0 997M 0% /sys/fs/cgroup /dev/vda15 105M 3.6M 101M 4% /boot/efi /dev/loop0 88M 88M 0 100% /snap/core/5662 /dev/loop1 67M 67M 0 100% /snap/lxd/9239 /dev/loop2 92M 92M 0 100% /snap/core/6531 /dev/loop3 54M 54M 0 100% /snap/lxd/10343 lala: 1.0P 0 1.0P 0% /lala/gdrive google-drive-ocamlfuse#安装PPA sudo add-apt-repository ppa:alessandro-strada/ppa sudo apt-get update sudo apt-get install google-drive-ocamlfuse sudo add-apt-repository ppa:alessandro-strada/google-drive-ocamlfuse-beta sudo apt-get update sudo apt-get install google-drive-ocamlfuse #安装opam以及相关依赖包 apt-get install opam opam init opam update opam install depext opam depext google-drive-ocamlfuse #请输入自己的ID和秘钥 google-drive-ocamlfuse -headless -label googledrive -id 305766299019-xxxxx729a3ugtebaf1kfiq25s8cqeivb.apps.googleusercontent.com -secret PEAJdRInHTVf29Kx8EaXXXXX #屏幕会提示 Please, open the following URL in a web browser: https://accounts.google.com/o/oauth2/auth?client_id=305766299019-xxxxx729a3ugtebaf1kfiq25s8cqeivb.apps.googleusercontent.com&amp;redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&amp;scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fdrive&amp;response_type=code&amp;access_type=offline&amp;approval_prompt=force Please enter the verification code: #浏览器中打开会得到一串verification code 4/qemZjOBy8MVI-dmaMPN3jJZ1ov_g6JbsdEeFfXXXXXX #若果提示Access token retrieved correctly.则表示成功 mkdir $HOME/GoogleDrive google-drive-ocamlfuse -label googledrive $HOME/GoogleDrive #查看挂载状态 ubuntu@VM-120-252-ubuntu:~$ df -hl Filesystem Size Used Avail Use% Mounted on udev 414M 0 414M 0% /dev tmpfs 87M 9.3M 78M 11% /run /dev/vda1 50G 2.6G 45G 6% / tmpfs 433M 24K 433M 1% /dev/shm tmpfs 5.0M 0 5.0M 0% /run/lock tmpfs 433M 0 433M 0% /sys/fs/cgroup tmpfs 87M 0 87M 0% /run/user/500 google-drive-ocamlfuse 15G 21M 15G 1% /home/ubuntu/GoogleDrive #卸载 fusermount -u $HOME/GoogleDrive GDriveFS（不推荐）。yum -y install epel-release yum -y install fuse fuse-devel python-pip python-devel gcc gcc-c++ openssl-devel pip install --upgrade pip pip install gdrivefs gdfstool auth -u #GDriveFS和Rclone一样，这里也会给你一个Google的登录授权地址： #浏览器输入地址得到授权码 gdfstool auth -a /var/cache/gdfs.creds &quot;你的授权码&quot; #显示 Authorization code recorded 表示成功 mkdir -p /lala/gdrivefs gdfstool mount /var/cache/gdfs.creds /lala/gdrivefs #如果遇到下面的错误请执行下面的命令 httplib2.SSLHandshakeError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed pip uninstall httplib2 pip install httplib2 gdfstool mount /var/cache/gdfs.creds /lala/gdrivefs 这里面总结一下，上面的运行环境既有CentOS也有Ubuntu。网友可以根据自己的需要来选择相应的命令我的运行的环境的Ubuntu，就我个人的使用情况来看 百度下载传输 Rclone最稳定，速度也最好，大概是因为优秀的cache机制。]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>百度网盘</tag>
+        <tag>google网盘</tag>
+        <tag>数据传输</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[网盘数据传输]]></title>
+    <url>%2F2019%2F03%2F23%2F%E7%BD%91%E7%9B%98%E5%B7%A5%E5%85%B7%2F</url>
+    <content type="text"><![CDATA[有了无限的google网盘容量后就需要做一些事情了，第一步就是要把垃圾百度的东西传进去。 为了上面的问题，小编也在网上找了不上工具，下面的网站倒是有办法。有兴趣的朋友可以试一下。https://www.multcloud.com/ 自己也用过一段时间，就暂时来说下这个网站的一些优缺点。 优点 1.支持中文，可以paypal。 2.支持网盘种类众多包括百度网盘，谷歌云盘，Dropbox，微软云盘，mega，FTP，Amazon Drive，亚马逊S3，pCloud，谷歌相册，Evernote，MySQL等多种网盘。 3.支持同一个网盘多种账号登陆。 4.付费会员可以选择多种同步类型以及传输方式。 缺点 1.百度云盘的文件必须放在 /apps/lin1118 目录下才可以传输，其他目录的文件读不到。 2.免费会员每月只有50G的流量，不限流量需要每月14.9美元 3.就算是会员，百度会员的传输速度已然坑爹的要死。（妈蛋，你还我钱！！） 由于速度上的坑爹，我实在是忍受不了，转向其他方法。]]></content>
+      <categories>
+        <category>工具</category>
+      </categories>
+      <tags>
+        <tag>网盘传输</tag>
+        <tag>数据转移</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[这个博客的由来]]></title>
+    <url>%2F2019%2F03%2F23%2Fstart%2F</url>
+    <content type="text"><![CDATA[作为一个技术渣渣，这个博客的由来可谓是一波三折。 3月的时候突然有个朋友告诉我google的校友邮箱可以拿到无限容量的gdriver，听到这个消息真的太兴奋了。 嘛，6T也好10T也罢，也就那么回事，但是居然是无限！这个就让人瞎想了。 立马准备搞一波，置于怎么申请无线网盘，这里就不做介绍了。有兴趣的可以加入telegram群组去详细看。 校友群虽好，翻车的可能性还是有的哦，官方车g-suite推荐一个。价格嘛，自己看上面的链接。 申请了无限容量的gdriver之后，有种空有屠龙刀，无龙可屠的感觉。 为了寻找适合的恶龙，又是一段折腾。 过程大概如下 有了无限盘我想把百度的东西转过来↘几个T的东西下载上传是不现实的 ↘那借助第三方工具吧 ↘第三方工具慢怎么办 ↘自己通过服务器中转吧 ↘服务器怎么 挂在gdrive和百度网盘 ↓ 这里面踩过超多坑，翻了好多技术大佬的博客，感觉他们好厉害，博客也很漂亮 ↓ 那我也做一个博客把这中间的坑记录下来吧→自己买个服务器搭建typecho？ ↓ 明显不现实啊，这个服务器我百度的数据转移完就放弃的，买个屁！ ↓ 看到大家用 github page比较厉害耶 ↓ 用hexo还是jekyll ↓ jekyll模板轮子太多，选择困难症呀，OK 那就hexo+nexT 以上就是我的入坑之旅，后面会慢慢介绍详细过程。]]></content>
+      <categories>
+        <category>blog</category>
+      </categories>
+      <tags>
+        <tag>日记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[实验]]></title>
+    <url>%2F2019%2F03%2F23%2Fhello-world%2F</url>
+    <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post$ hexo new &quot;My New Post&quot; More info: Writing Run server$ hexo server More info: Server Generate static files$ hexo generate More info: Generating Deploy to remote sites$ hexo deploy More info: Deployment]]></content>
+      <categories>
+        <category>blog</category>
+      </categories>
+      <tags>
+        <tag>日记</tag>
+      </tags>
+  </entry>
+</search>
