@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[宝塔面板简介]]></title>
+    <url>%2F2019%2F04%2F16%2F%E5%AE%9D%E5%A1%94%2F</url>
+    <content type="text"><![CDATA[生命不息，折腾不止。最近在网上看了比较著名的WordPress和typecho博客系统，当然我是不准备把这个转过去了，毕竟githubpage可以免费托管。但是该学习了解的还是要了解。网上所说的是WordPress用的人最多，但是速度不够快，typecho貌似用的人还蛮多，也有不错的主题。但是这两款暂时都没有尝鲜的打算，在接触的过程中了解到伟大的宝塔，这里先介绍下宝塔。 准备首先希望你的系统比较干净，没有暗转过 mysql apache这些。 #CentOS系统 wget -O install.sh http://download.bt.cn/install/install_6.0.sh &amp;&amp; sh install.sh #Ubuntu系统 wget -O install.sh http://download.bt.cn/install/install-ubuntu_6.0.sh &amp;&amp; sudo bash install.sh #Debian系统 wget -O install.sh http://download.bt.cn/install/install-ubuntu_6.0.sh &amp;&amp; bash install.sh 安装安装完成后会 提示URL和用户名密码，请保存记住。 提示：如果我们后续未修改密码却忘记了密码的话，可以在SSH客户端使用命令bt default来查看安装后的默认后台信息。 后台登陆，这个时候宝塔会提示让我们选择环境。 相信大家都是小vps啦，这里建议选择LNMP，环境为Nginx 1.15、PHP 7.2、Mysql 5.5，如果内存1G建议选择Mysql 5.6、2G选择5.7。选择好了后点击一键安装即可。安装完成后，点击左侧软件管理-宝塔插件，安装宝塔一键部署源码，装好后点击设置。 安装完成后会提示数据库的名称密码，请保存好。 提示：如果忘记了数据库信息，可以点击面板左侧-数据库进行查看。 wordpress这里尝试安装了WordPress，安装完成后进入你设置的域名会带你设置。其他blog以及WordPress的高级设置，亲们可以自己研究。]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>宝塔</tag>
+        <tag>博客选择</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[谷歌vps尝试]]></title>
     <url>%2F2019%2F04%2F14%2Fgcp%2F</url>
     <content type="text"><![CDATA[telegram关于各种校友邮箱翻车的传言不断传过来，内心还是慌张的，毕竟自己那么多资源在里面呢，最后还是买了域名上了google的官方车，我的钱包那叫一个心疼啊，不过这真金白银的下去就要好好用了。 简介google clound Platform（简称GCP）现在有个免费一年300刀的活动，可以开始薅羊毛了。你所需要的是一张visa或者MasterCard信用卡，笔者试了招商银行的visa卡，可以通过。这里面的具体步骤这里就不再赘述了。 介绍首先进入Computer Engine以后，先创建一个实例，选择合适自己的套餐。 打开HTTP流量和HTTPS流量开关。实例创建完成以后可以看到该实例的外部IP和内部IP。下面其实可以用chrome来连接服务器了，但是网页来连接会有各种操作卡顿的问题。下面需要添加公钥让本地ssh工具访问。本地生成公钥密码后，在控制台选择元数据，选择其中的ssh密钥，修改=》添加本地的公钥。 本地的ssh工具上 ssh 用户名@IP #就可以成功进入实例了，如果有问题请参照上一篇文章 sudo -i #获取root权限]]></content>
