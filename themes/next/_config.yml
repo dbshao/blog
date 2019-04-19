@@ -96,13 +96,11 @@ menu:
   #about: /about/ || user
   标签: /tags/ || tags
   分类: /categories/ || th
-  #Linux: /linux|| linux
-  #Java: /java|| java
   #读书: /books/ ||book
   #电影: /movies/||tv
   归档: /archives/ || archive
   日历: /schedule/ || calendar
-  #sitemap: /sitemap.xml || sitemap
+  sitemap: /sitemap.xml || sitemap
   #commonweal: /404/ || heartbeat
 
 # Enable/Disable menu icons.
@@ -114,7 +112,7 @@ menu_icons:
 # Scheme Settings
 # ---------------------------------------------------------------
 
-# Schemes
+#Schemes
 #scheme: Muse
 #scheme: Mist
 #scheme: Pisces

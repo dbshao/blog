@@ -13,7 +13,7 @@ timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://yoursite.com
+url: http://yourboys.org
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -82,16 +82,6 @@ deploy:
   repo: git@github.com:dbshao/dbshao.github.io.git
   branch: master
 
-#豆瓣插件
-douban:
-  user: dbshao
-  builtin: false
-  book:
-    title: '书中自颜如玉'
-    quote: '这里的故事真奇妙'
-  movie:
-   title: '窗外的世界更精彩'
-   quote: '这里的人儿真好笑'    
 
 #搜索功能
 search:
@@ -103,6 +93,9 @@ search:
   #生成sitemap
   sitemap:
     path: sitemap.xml
+  baidusitemap:
+    path: baidusitemap.xml
+  url: www.yourboys.org
 
 #自定义高亮代码（google prettify code）
 custom_highlight_theme: atelier-dune-light

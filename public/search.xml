@@ -1,6 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[awesome的使用]]></title>
+    <url>%2F2019%2F04%2F20%2Fawesome%2F</url>
+    <content type="text"><![CDATA[经常在网上看到各种各样的图标样式很好看，比如左边的github和E-mail图标，这就是大名鼎鼎的awesome，其实我们的nexT主题上面有，现在就介绍给大家。 其实不用多介绍什么，直接给例子就好了，详细请参考下面的网站。https://fontawesome.com/v4.7.0/examples/ &lt;i class=&quot;fa fa-pencil&quot;&gt;&lt;/i&gt; 铅笔 &lt;i class=&quot;fa fa-cloud-upload&quot;&gt;&lt;/i&gt; 上传 &lt;i class=&quot;fa fa-alipay&quot;&gt;&lt;/i&gt; alipay &lt;i class=&quot;fa fa-download&quot;&gt;&lt;/i&gt; 下载 &lt;i class=&quot;fa fa-download fa-lg&quot;&gt;&lt;/i&gt; 下载变大 33% &lt;i class=&quot;fa fa-download fa-2x&quot;&gt;&lt;/i&gt; 下载两倍大 铅笔 上传 alipay 下载 下载变大 33% 下载两倍大 看到网站上的free版本支持1512个icon，个人觉得已经远远够用了。]]></content>
+      <categories>
+        <category>blog</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>nexT</tag>
+        <tag>awesome</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[快速查询百度网盘下载链接的提取码]]></title>
+    <url>%2F2019%2F04%2F19%2F%E6%8F%90%E5%8F%96%E7%A0%81%2F</url>
+    <content type="text"><![CDATA[作为最大小哥哥小姐姐分享平台，百度网盘可谓是我们生活带了很多美好，为了防止链接的各种泄漏和安全，每个链接都有安全码，各位大佬大多都是有提取码的，相关的chrome插件也有，下面介绍的这个比较厉害了可以自动计算百度的提取码，具体原理不知道，不过四位的数字和字母组合的话，硬来也没什么大问题 介绍https://github.com/wu-dada/baidupankeyhttps://pnote.net/pan如果不想自己搭建，可以在上面的web页面直接查询。 安装#Debian/Ubuntu系统 curl -sL https://deb.nodesource.com/setup_10.x | bash - apt install -y nodejs #CentOS系统 curl -sL https://rpm.nodesource.com/setup_10.x | bash - yum install nodejs -y #安装工具 npm install baidupankey -g #查询 bdp -u https://pan.baidu.com/s/xxxxx]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>百度网盘</tag>
+        <tag>提取码查询</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[三十而立]]></title>
+    <url>%2F2019%2F04%2F19%2F%E4%B8%89%E5%8D%81%E8%80%8C%E7%AB%8B%2F</url>
+    <content type="text"></content>
+  </entry>
+  <entry>
     <title><![CDATA[宝塔面板简介]]></title>
     <url>%2F2019%2F04%2F16%2F%E5%AE%9D%E5%A1%94%2F</url>
     <content type="text"><![CDATA[生命不息，折腾不止。最近在网上看了比较著名的WordPress和typecho博客系统，当然我是不准备把这个转过去了，毕竟githubpage可以免费托管。但是该学习了解的还是要了解。网上所说的是WordPress用的人最多，但是速度不够快，typecho貌似用的人还蛮多，也有不错的主题。但是这两款暂时都没有尝鲜的打算，在接触的过程中了解到伟大的宝塔，这里先介绍下宝塔。 准备首先希望你的系统比较干净，没有暗转过 mysql apache这些。 #CentOS系统 wget -O install.sh http://download.bt.cn/install/install_6.0.sh &amp;&amp; sh install.sh #Ubuntu系统 wget -O install.sh http://download.bt.cn/install/install-ubuntu_6.0.sh &amp;&amp; sudo bash install.sh #Debian系统 wget -O install.sh http://download.bt.cn/install/install-ubuntu_6.0.sh &amp;&amp; bash install.sh 安装安装完成后会 提示URL和用户名密码，请保存记住。 提示：如果我们后续未修改密码却忘记了密码的话，可以在SSH客户端使用命令bt default来查看安装后的默认后台信息。 后台登陆，这个时候宝塔会提示让我们选择环境。 相信大家都是小vps啦，这里建议选择LNMP，环境为Nginx 1.15、PHP 7.2、Mysql 5.5，如果内存1G建议选择Mysql 5.6、2G选择5.7。选择好了后点击一键安装即可。安装完成后，点击左侧软件管理-宝塔插件，安装宝塔一键部署源码，装好后点击设置。 安装完成后会提示数据库的名称密码，请保存好。 提示：如果忘记了数据库信息，可以点击面板左侧-数据库进行查看。 wordpress这里尝试安装了WordPress，安装完成后进入你设置的域名会带你设置。其他blog以及WordPress的高级设置，亲们可以自己研究。]]></content>
