@@ -816,5 +816,12 @@ recent_posts_title: 近期文章
 recent_post_layout: block
 recent_posts: true
 
+#云日历
+CloudCalendar:
+  enable: true
+  language: zh-CN
+  single: true
+  root: /calendar/
+  
 # Theme version
 version: 5.1.4

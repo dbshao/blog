@@ -26,6 +26,12 @@
         </ul>
       {% endif %}
 
+                
+<!-- CloudCalendar -->
+<div class="widget-wrap" style="width: 90%;margin-left: auto;margin-right: auto; opacity: 0.97;">
+	<div class="widget" id="CloudCalendar"></div>
+</div>
+
       <section class="site-overview-wrap sidebar-panel{% if not display_toc or toc(page.content).length <= 1 %} sidebar-panel-active{% endif %}">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -80,7 +86,6 @@
                 {% if hasTagsPage %}</a>{% endif %}
               </div>
             {% endif %}
-
           </nav>
 
           {% if theme.rss %}

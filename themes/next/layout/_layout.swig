@@ -91,5 +91,8 @@
 
   {#添加google prettify 代码样式#}
   {% include '_third-party/prettify.swig' %}
+
+{#添加云日历样式#}
+ {% include '_third-party/CloudCalendar.swig' %}
 </body>
 </html>
