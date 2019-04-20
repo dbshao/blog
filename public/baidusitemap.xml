@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://yourboys.org/2019/04/20/awesome/</loc>
-    <lastmod>2019-04-19</lastmod>
-  </url>  <url>
-    <loc>http://yourboys.org/2019/04/19/%E6%8F%90%E5%8F%96%E7%A0%81/</loc>
-    <lastmod>2019-04-19</lastmod>
+    <loc>http://yourboys.org/2019/04/21/%E6%8F%92%E5%85%A5%E8%A7%86%E9%A2%91%E5%92%8C%E9%9F%B3%E9%A2%91/</loc>
+    <lastmod>2019-04-20</lastmod>
   </url>  <url>
     <loc>http://yourboys.org/2019/04/19/%E4%B8%89%E5%8D%81%E8%80%8C%E7%AB%8B/</loc>
+    <lastmod>2019-04-20</lastmod>
+  </url>  <url>
+    <loc>http://yourboys.org/2019/04/19/%E6%8F%90%E5%8F%96%E7%A0%81/</loc>
+    <lastmod>2019-04-20</lastmod>
+  </url>  <url>
+    <loc>http://yourboys.org/2019/04/20/awesome/</loc>
     <lastmod>2019-04-19</lastmod>
   </url>  <url>
     <loc>http://yourboys.org/2019/04/16/%E5%AE%9D%E5%A1%94/</loc>

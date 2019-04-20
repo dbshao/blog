@@ -388,6 +388,12 @@
 
       
 
+                
+<!-- CloudCalendar -->
+<div class="widget-wrap" style="width: 90%;margin-left: auto;margin-right: auto; opacity: 0.97;">
+	<div class="widget" id="CloudCalendar"></div>
+</div>
+
       <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -405,7 +411,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -416,7 +422,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -427,12 +433,11 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-count">39</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
             
-
           </nav>
 
           
@@ -473,6 +478,10 @@
         
         
           <li>
+            <a href="/2019/04/21/插入视频和音频/" title="插入视频和音频" target="_blank">插入视频和音频</a>
+          </li>
+        
+          <li>
             <a href="/2019/04/20/awesome/" title="awesome的使用" target="_blank">awesome的使用</a>
           </li>
         
@@ -486,10 +495,6 @@
         
           <li>
             <a href="/2019/04/16/宝塔/" title="宝塔面板简介" target="_blank">宝塔面板简介</a>
-          </li>
-        
-          <li>
-            <a href="/2019/04/14/gcp/" title="谷歌vps尝试" target="_blank">谷歌vps尝试</a>
           </li>
         
       </ul>
@@ -530,7 +535,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">13.6k</span>
+    <span title="Site words total count">15.3k</span>
   
 </div>
 
@@ -1098,5 +1103,27 @@
       prettyPrint();
   });
 </script>
+
+
+ <!-- calendar widget -->
+
+
+    <script src="/lib/CloudCalendar/CloudCalendar.js"></script>
+    <script src="/lib/CloudCalendar/languages.js"></script>
+    <script type="text/javascript">
+    $(function() {
+        $('#CloudCalendar').aCalendar('zh-CN', 
+            $.extend(
+                '', {
+                    single:true,
+                    root:'/calendar/'
+                }
+            )
+        );
+    });
+    </script>
+
+
+
 </body>
 </html>
