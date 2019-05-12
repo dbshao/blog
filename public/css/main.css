@@ -1,3 +1,7 @@
+code {
+  color: #fff !important;
+  background: #2780e3 !important;
+}
 /* normalize.css v3.0.2 | MIT License | git.io/normalize */
 html {
   font-family: sans-serif; /* 1 */
@@ -1955,7 +1959,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #3941ff;
+  background: #c901e3;
 }
 .links-of-blogroll {
   font-size: 13px;

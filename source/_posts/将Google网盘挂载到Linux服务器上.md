@@ -51,6 +51,9 @@ tmpfs           997M     0  997M   0% /sys/fs/cgroup
 /dev/loop2       92M   92M     0 100% /snap/core/6531
 /dev/loop3       54M   54M     0 100% /snap/lxd/10343
 lala:           1.0P     0  1.0P   0% /lala/gdrive
+
+#卸载
+fusermount -u /lala/gdrive
 ```
 ### google-drive-ocamlfuse
 ```bash
